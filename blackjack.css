@@ -42,9 +42,11 @@ body {
    border-radius: 5px;
 }
 
-.hit:focus, .stay:focus {
+.hit:hover, .stay:hover {
    background: #ccc324;
+   transition: 0.3s;
 }
-.restart:focus {
+.restart:hover {
    background: goldenrod;
+   transition: 0.3s
 }
