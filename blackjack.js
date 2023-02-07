@@ -1,13 +1,10 @@
-var dealerSum = 0;
-var yourSum = 0;
-
-var dealerAceCount = 0;
-var yourAceCount = 0; 
-
-var hidden;
-var deck;
-
-var canHit = true; //allows the player (you) to draw while yourSum <= 21
+let dealerSum = 0;
+let yourSum = 0;
+let dealerAceCount = 0;
+let yourAceCount = 0; 
+let hidden;
+let deck;
+let canHit = true; //allows the player to draw while yourSum <= 21
 
 window.onload = function() {
     buildDeck();
@@ -16,8 +13,8 @@ window.onload = function() {
 }
 
 function buildDeck() {
-    let values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
     let types = ["C", "D", "H", "S"];
+    let values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
     deck = [];
 
     for (let i = 0; i < types.length; i++) {
@@ -28,9 +25,8 @@ function buildDeck() {
     // console.log(deck);
 }
 
-// ***********************************************************************************
-// SHUFFLE
-// We loop through the array and we get a random position from the array each time, then swap the current item with the item in the random position. This is called the "Fisher Yates Shuffle Algoritm"
+// *Shuffle
+// We loop through the array and we get a random position from the array each time, then swap the current item with the item in the random position (Fisher Yates Algorithm)
 function shuffleDeck() {
     for (let i = 0; i < deck.length; i++) {
         let j = Math.floor(Math.random() * deck.length); // (0-1) * 52 => (0-51.9999)
@@ -54,7 +50,6 @@ function startGame() {
         dealerAceCount += checkAce(card);
         document.getElementById("dealer-cards").append(cardImg);
     }
-    console.log(dealerSum);
 
     for (let i = 0; i < 2; i++) {
         let cardImg = document.createElement("img");
@@ -68,7 +63,6 @@ function startGame() {
     console.log(yourSum);
     document.getElementById("hit").addEventListener("click", hit);
     document.getElementById("stay").addEventListener("click", stay);
-
 }
 
 function hit() {
@@ -83,15 +77,14 @@ function hit() {
     yourAceCount += checkAce(card);
     document.getElementById("your-cards").append(cardImg);
 
-    if (reduceAce(yourSum, yourAceCount) > 21) { //A, J, 8 -> 1 + 10 + 8
+    if (decreaseAce(yourSum, yourAceCount) > 21) { //A, J, 8 -> 1 + 10 + 8
         canHit = false;
     }
-
 }
 
 function stay() {
-    dealerSum = reduceAce(dealerSum, dealerAceCount);
-    yourSum = reduceAce(yourSum, yourAceCount);
+    dealerSum = decreaseAce(dealerSum, dealerAceCount);
+    yourSum = decreaseAce(yourSum, yourAceCount);
 
     canHit = false;
     document.getElementById("hidden").src = "./cards/" + hidden + ".png";
@@ -103,7 +96,7 @@ function stay() {
     else if (dealerSum > 21) {
         message = "You win!";
     }
-    //both you and dealer <= 21
+    //both the player & dealer <= 21
     else if (yourSum == dealerSum) {
         message = "Tie!";
     }
@@ -139,10 +132,13 @@ function checkAce(card) {
     return 0;
 }
 
-function reduceAce(playerSum, playerAceCount) {
+function decreaseAce(playerSum, playerAceCount) {
     while (playerSum > 21 && playerAceCount > 0) {
         playerSum -= 10;
         playerAceCount -= 1;
     }
     return playerSum;
 }
+
+let restart = document.querySelector("#restart");
+restart.addEventListener("click", () => location.reload());
