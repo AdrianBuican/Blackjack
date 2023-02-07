@@ -22,7 +22,6 @@ function buildDeck() {
             deck.push(values[j] + "-" + types[i]); //A-C -> K-C, A-D -> K-D
         }
     }
-    // console.log(deck);
 }
 
 // *Shuffle
