@@ -36,12 +36,12 @@ body {
    width: 125px;
    height: 40px;
    font-size: 20px;
-   background: rgb(218, 165, 32);
+   background: #daa520;
    color: black;
    font-weight:bold;
    border-radius: 5px;
 }
 
 .hit:focus, .stay:focus, .restart:focus{
-   background: rgb(238, 205, 61);
+   background: #eecd3d;
 }
