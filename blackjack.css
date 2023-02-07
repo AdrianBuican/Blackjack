@@ -36,12 +36,15 @@ body {
    width: 125px;
    height: 40px;
    font-size: 20px;
-   background: #daa520;
+   background: #ccc324;
    color: black;
    font-weight:bold;
    border-radius: 5px;
 }
 
-.hit:focus, .stay:focus, .restart:focus{
-   background: #eecd3d;
+.hit:focus, .stay:focus {
+   background: #ccc324;
+}
+.restart:focus {
+   background: goldenrod;
 }
